@@ -266,4 +266,23 @@ export const DATA = {
       video: "cleanmadina.mp4",
     },
   ],
+  certificates: [
+    {
+      name: "ALX AiCE - AI Career Essentials",
+      issuingOrganization: "Alx Africa",
+      issueDate: " 3rd December 2024",
+      credentialId: "FmYXfM5Ec6",
+      credentialUrl: "https://intranet.alxswe.com/certificates/FmYXfM5Ec6",
+      logo: "/alx.png",
+    },
+    {
+      name: "Zerifikat B1",
+      issuingOrganization: "ÖSD – Österreichisches Sprachdiplom Deutsch",
+      issueDate: "October 2020",
+      credentialId: "ZB12012344",
+      credentialUrl:
+        "https://media.licdn.com/dms/image/v2/D4E2DAQFrqCWDdvu9Bw/profile-treasury-document-cover-images_1280/profile-treasury-document-cover-images_1280/0/1709529045626?e=1734789600&v=beta&t=bIHr3xcX6k7NXi4IIggMVl0CfD8Ekb7avjbZ1FQtbwY",
+      logo: "/osd.jpg",
+    },
+  ],
 } as const;
