@@ -16,7 +16,7 @@ interface Props {
   href?: string;
   description: string;
   dates: string;
-  tags: readonly string[];
+  iconLists?: readonly string[];
   link?: string;
   image?: string;
   video?: string;
@@ -33,7 +33,7 @@ export function ProjectCard({
   href,
   description,
   dates,
-  tags,
+  iconLists,
   link,
   image,
   video,
@@ -83,20 +83,27 @@ export function ProjectCard({
           </Markdown>
         </div>
       </CardHeader>
-      <CardContent className="mt-2 flex flex-col px-2">
-        {tags && tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-1">
-            {tags?.map((tag) => (
-              <Badge
-                className="px-1 py-0 text-[10px]"
-                variant="secondary"
-                key={tag}
+      <CardContent className="mt-auto flex flex-col py-2 px-2">
+        <div className="flex items-center">
+          {iconLists &&
+            iconLists.map((icon, index) => (
+              <div
+                key={index}
+                className="border border-black/[.2] dark:border-white/[.2] rounded-full bg-white dark:bg-black hover:bg-black/10 dark:hover:bg-white/10 lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
+                style={{
+                  transform: `translateX(-${5 * index + 2}px)`,
+                }}
               >
-                {tag}
-              </Badge>
+                <Image
+                  src={icon}
+                  alt="icon"
+                  width={40}
+                  height={40}
+                  className="p-2"
+                />
+              </div>
             ))}
-          </div>
-        )}
+        </div>
       </CardContent>
       <CardFooter className="px-2 pb-2">
         {links && links.length > 0 && (

@@ -1,19 +1,27 @@
 import { Certificates } from "@/components/Certificates";
-import { HackathonCard } from "@/components/hackathon-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Title } from "@/components/Tiltle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
 import { DATA } from "@/data/resume";
-import { Certificate } from "crypto";
+import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
+function Badge(props: any) {
+  return (
+    <a
+      {...props}
+      target="_blank"
+      className="inline-flex items-center rounded border border-neutral-200 bg-neutral-50 p-1 text-sm leading-4 text-neutral-900 no-underline dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
+    />
+  );
+}
 
 export default function Page() {
   return (
@@ -118,9 +126,23 @@ export default function Page() {
             <h2 className="text-xl font-bold">Skills</h2>
           </BlurFade>
           <div className="flex flex-wrap gap-1">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <Badge key={skill}>{skill}</Badge>
+            {DATA.Skills.map((skills) => (
+              <BlurFade
+                key={skills.id}
+                delay={BLUR_FADE_DELAY * 10 + skills.id * 0.05}
+              >
+                <div className="flex items-center">
+                  <Badge href={skills.site} className="flex items-center">
+                    <Image
+                      alt={skills.title}
+                      src={skills.href}
+                      className="mr-2"
+                      width="14"
+                      height="14"
+                    />
+                    {skills.title}
+                  </Badge>
+                </div>
               </BlurFade>
             ))}
           </div>
@@ -180,7 +202,7 @@ export default function Page() {
                   title={project.title}
                   description={project.description}
                   dates={project.dates}
-                  tags={project.technologies}
+                  iconLists={project.iconLists}
                   image={project.image}
                   video={project.video}
                   links={project.links}

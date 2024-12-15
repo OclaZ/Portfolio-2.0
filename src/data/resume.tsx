@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon, icons, NotebookIcon } from "lucide-react";
 
 export const DATA = {
   name: "Hamza Aslikh",
@@ -12,23 +12,117 @@ export const DATA = {
   summary:
     "I am a Software Developer specializing in web development and digital marketing. Based in Agadir, Morocco, I am passionate about transforming complex problems into simple, aesthetic, and intuitive solutions. My goal is to convey your message and identity in the most creative and impactful way possible, ensuring that each project faithfully reflects your values while captivating your target audience.",
   avatarUrl: "/avatar1.png",
-  skills: [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Tailwind CSS",
-    "React",
-    "Next.js",
-    "Typescript",
-    "Node.js",
-    "Python",
-    "Go",
-    "Postgres",
-    "Docker",
-    "Vercel",
-    "Java",
-    "C++",
+  Skills: [
+    {
+      id: 1,
+      title: "HTML",
+      href: "/html.svg",
+      site: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+    },
+    {
+      id: 2,
+      title: "CSS",
+      href: "/css.svg",
+      site: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+    },
+    {
+      id: 3,
+      title: "JavaScript",
+      href: "/javascript.svg",
+      site: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    },
+    {
+      id: 4,
+      title: "Tailwind CSS",
+      href: "/tailwindcss.svg",
+      site: "https://tailwindcss.com",
+    },
+    {
+      id: 5,
+      title: "React",
+      href: "/react-logo.svg",
+      site: "https://react.dev",
+    },
+    {
+      id: 6,
+      title: "Next.js",
+      href: "/next-logo.svg",
+      site: "https://nextjs.org",
+    },
+    {
+      id: 7,
+      title: "TypeScript",
+      href: "/typescript.svg",
+      site: "https://www.typescriptlang.org",
+    },
+    {
+      id: 8,
+      title: "Node.js",
+      href: "/nodejs.svg",
+      site: "https://nodejs.org",
+    },
+    {
+      id: 9,
+      title: "Python",
+      href: "/python.svg",
+      site: "https://www.python.org",
+    },
+    {
+      id: 10,
+      title: "Postgres",
+      href: "/postgresql.svg",
+      site: "https://www.postgresql.org",
+    },
+    {
+      id: 11,
+      title: "Prisma",
+      href: "/prisma.svg",
+      site: "https://www.prisma.io",
+    },
+    {
+      id: 12,
+      title: "Drizzle",
+      href: "/drizzle.svg",
+      site: "https://orm.drizzle.team",
+    },
+    {
+      id: 13,
+      title: "MongoDB",
+      href: "/mongo.svg",
+      site: "https://mangojs.dev",
+    },
+    {
+      id: 14,
+      title: "Docker",
+      href: "/docker.svg",
+      site: "https://www.docker.com",
+    },
+    {
+      id: 15,
+      title: "Vercel",
+      href: "/vercel.svg",
+      site: "https://vercel.com",
+    },
+    {
+      id: 16,
+      title: "Windev",
+      href: "/windev.svg",
+      site: "https://www.pcsoft-windev.com",
+    },
+    {
+      id: 17,
+      title: "Java",
+      href: "/java.svg",
+      site: "https://www.oracle.com/java",
+    },
+    {
+      id: 18,
+      title: "C++",
+      href: "/cpp.svg",
+      site: "https://isocpp.org",
+    },
   ],
+
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog", navbar: false },
@@ -150,17 +244,14 @@ export const DATA = {
       active: true,
       description:
         "Faturly is a professional invoice application tailored for online businesses, developed with Next.js. It enables businesses to streamline their invoicing processes, generate PDF invoices, and send them via email with ease.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Vercel",
-        "AuthJs",
-        "PDFJS",
-        "Shadcn UI",
-        "Magic UI",
+      iconLists: [
+        "/next-logo.svg",
+        "/tailwindcss.svg",
+        "/typescript.svg",
+        "/prisma.svg",
+        "/postgresql.svg",
+        "/shadcn.svg",
+        "/vercel.svg",
       ],
       links: [
         {
@@ -184,12 +275,12 @@ export const DATA = {
       active: true,
       description:
         "WeLoveCall is a comprehensive service designed to generate qualified real estate leads through optimized advertising campaigns. It offers a streamlined approach to help real estate brokers achieve consistent growth in their portfolios by targeting potential clients effectively.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "TailwindCSS",
-        "Shadcn UI",
-        "Vercel",
+      iconLists: [
+        "/next-logo.svg",
+        "/tailwindcss.svg",
+        "/typescript.svg",
+        "/vercel.svg",
+        "/shadcn.svg",
       ],
       links: [
         {
@@ -213,15 +304,13 @@ export const DATA = {
       active: true,
       description:
         "TA7ALIL AI is an advanced healthcare application that leverages artificial intelligence to analyze medical reports. Built with cutting-edge technologies, it provides healthcare professionals with quick and accurate insights from medical documents.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "Gemini AI",
-        "Pinecone",
-        "mixedbread-ai/mxbai-embed-large-v1",
-        "TailwindCSS",
-        "Shadcn UI",
-        "Vercel",
+      iconLists: [
+        "/next-logo.svg",
+        "/tailwindcss.svg",
+        "/typescript.svg",
+        "/gemini.svg",
+        "/shadcn.svg",
+        "/vercel.svg",
       ],
       links: [
         {
@@ -245,15 +334,15 @@ export const DATA = {
       active: true,
       description:
         "CleanMadina is a Moroccan waste management application developed using Next.js. This app aims to streamline waste collection processes and enhance community engagement in environmental sustainability.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "Gemini AI",
-        "PostgreSQL",
-        "Drizzle ORM",
-        "TailwindCSS",
-        "Shadcn UI",
-        "Vercel",
+      iconLists: [
+        "/next-logo.svg",
+        "/tailwindcss.svg",
+        "/typescript.svg",
+        "/gemini.svg",
+        "/postgresql.svg",
+        "/drizzle.svg",
+        "/shadcn.svg",
+        "/vercel.svg",
       ],
       links: [
         {
