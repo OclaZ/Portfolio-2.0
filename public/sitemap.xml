@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<sitemap>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
     <loc>https://hamzaaslikh.com</loc>
-    <lastmod>2024-12-15T15:02:24.021Z</lastmod>
+    <lastmod>2024-12-15T15T15:02:24.021Z</lastmod>
     <changefreq>yearly</changefreq>
     <priority>1</priority>
-  </sitemap>
-  <sitemap>
-    <loc>https://hamzaaslikh.com/blog</loc>
-    <lastmod>2024-12-15T15:02:24.021Z</lastmod>
+  </url>
+  <url>
+    <loc>https://acme.com/blog</loc>
+    <lastmod>2024-12-15T15T15:02:24.021Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </sitemap>
-</sitemapindex>
+  </url>
+</urlset>
