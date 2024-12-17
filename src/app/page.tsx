@@ -215,6 +215,17 @@ export default async function Page() {
                 />
               </BlurFade>
             ))}
+            <div className="col-span-full flex justify-end">
+              <BlurFade
+                delay={BLUR_FADE_DELAY * 12 + DATA.projects.length * 0.05}
+              >
+                <Link href="/projects" className="w-auto">
+                  <Button variant={"outline"} className="mt-2">
+                    View All Projects →
+                  </Button>
+                </Link>
+              </BlurFade>
+            </div>
           </div>
         </div>
       </section>
