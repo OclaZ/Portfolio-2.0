@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
+import LoadingPage from "./loading";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -27,14 +29,14 @@ export const metadata: Metadata = {
     description: DATA.description,
     url: DATA.url,
     siteName: `${DATA.name}`,
-    locale: "en_US",
+    locale: "en-US",
     type: "website",
     images: [
       {
-        url: `${DATA.url}/og-image.jpg`,
+        url: `${DATA.url}/avatar1.png`,
         width: 1200,
         height: 630,
-        alt: `${DATA.name} Open Graph Image`,
+        alt: `${DATA.name} avatar`,
       },
     ],
   },
@@ -96,7 +98,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="light">
           <TooltipProvider delayDuration={0}>
-            {children}
+            <Suspense fallback={<LoadingPage />}>{children}</Suspense>
             <Analytics />
             <Navbar />
           </TooltipProvider>

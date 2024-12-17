@@ -22,8 +22,14 @@ function Badge(props: any) {
     />
   );
 }
+async function getData() {
+  // Simulate delay with fetch
+  await new Promise((resolve) => setTimeout(resolve, 1000)); // 2 second delay
+  return { message: "Page Content Loaded" };
+}
 
-export default function Page() {
+export default async function Page() {
+  const data = await getData();
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">
       <section id="hero">
