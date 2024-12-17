@@ -56,10 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [`${DATA.url}/twitter-image.jpg`],
   },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-  },
+
 };
 
 export default function RootLayout({
@@ -70,9 +67,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        {/* Favicon Links */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="canonical" href={DATA.url} />
+
+        {/* Favicon Meta for Google */}
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileImage" content="/mstile-150x150.png" />
+        <meta name="theme-color" content="#ffffff" />
+
+        {/* Viewport Meta */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
