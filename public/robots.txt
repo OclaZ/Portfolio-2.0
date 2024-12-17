@@ -7,3 +7,4 @@ Host: https://hamzaaslikh.com
 
 # Sitemaps
 Sitemap: https://hamzaaslikh.com/sitemap.xml
+Sitemap: https://www.hamzaaslikh.com/sitemap.xml
