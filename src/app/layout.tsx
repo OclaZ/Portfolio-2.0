@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -56,7 +57,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [`${DATA.url}/twitter-image.jpg`],
   },
-
 };
 
 export default function RootLayout({
@@ -114,6 +114,7 @@ export default function RootLayout({
           <TooltipProvider delayDuration={0}>
             <Suspense fallback={<LoadingPage />}>{children}</Suspense>
             <Analytics />
+            <SpeedInsights />
             <Navbar />
           </TooltipProvider>
         </ThemeProvider>
