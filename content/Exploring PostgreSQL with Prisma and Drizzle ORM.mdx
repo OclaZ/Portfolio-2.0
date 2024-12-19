@@ -1,0 +1,113 @@
+---
+title: "Exploring PostgreSQL with Prisma and Drizzle ORM"
+publishedAt: "2024-06-18"
+summary: "A deep dive into PostgreSQL with Prisma and Drizzle ORM for modern web applications."
+---
+
+# PostgreSQL with Prisma and Drizzle ORM 🌐
+
+Hello, everyone! I’m **Hamza Aslikh**, a developer passionate about building scalable and efficient backend systems. In this post, I’ll share my experience using **PostgreSQL** with **Prisma** and **Drizzle ORM**, two powerful tools for database management in modern web development.
+
+## Why PostgreSQL?
+
+**PostgreSQL** is an advanced, open-source relational database that’s widely adopted for its:
+
+- **Reliability:** Proven stability in production environments.
+- **Scalability:** Handles complex queries and large datasets with ease.
+- **Extensibility:** Supports custom data types and extensions like PostGIS for geospatial data.
+
+## What is Prisma?
+
+**Prisma** is a next-generation ORM that simplifies database workflows. It’s ideal for developers who:
+
+- Need a **type-safe** way to interact with their database.
+- Prefer an **auto-generated schema** based on database models.
+- Want seamless integration with **TypeScript** and modern frameworks like **Next.js**.
+
+### Key Features of Prisma
+
+- **Prisma Client:** Auto-generated, type-safe database queries.
+- **Prisma Migrate:** Schema migrations made easy.
+- **Prisma Studio:** A GUI for managing your database.
+
+### Getting Started with Prisma
+
+Install Prisma:
+
+```bash
+npm install prisma --save-dev
+npx prisma init
+```
+
+Define your schema in `prisma/schema.prisma` and generate the Prisma client:
+
+```bash
+npx prisma generate
+```
+
+## What is Drizzle ORM?
+
+**Drizzle ORM** is a lightweight TypeScript-first ORM that emphasizes simplicity and flexibility. It’s designed for:
+
+- Developers who value a **minimalist approach** to database management.
+- Applications requiring **fine-grained control** over SQL queries.
+- Projects leveraging modern stacks like **Vercel** and **Edge Functions**.
+
+### Key Features of Drizzle ORM
+
+- **Type Safety:** Built-in support for TypeScript.
+- **Custom SQL Queries:** Write raw SQL with ease.
+- **Database Agnostic:** Works with multiple database systems, including PostgreSQL.
+
+### Getting Started with Drizzle ORM
+
+Install Drizzle ORM:
+
+```bash
+npm install drizzle-orm
+```
+
+Set up a connection:
+
+```typescript
+import { drizzle } from 'drizzle-orm';
+import { pg } from 'drizzle-orm/pg';
+
+const db = drizzle(pg({ connectionString: 'your-database-url' }));
+```
+
+## Combining Prisma and Drizzle
+
+While both Prisma and Drizzle have unique strengths, they can be used together in scenarios like:
+
+- **Rapid Prototyping:** Use Prisma for migrations and Drizzle for custom queries.
+- **Microservices Architecture:** Prisma for core services, Drizzle for lightweight edge functions.
+
+## My Workflow
+
+Here’s how I approach PostgreSQL projects:
+
+1. **Schema Design:** Start with a clear schema plan in PostgreSQL.
+2. **Tool Selection:** Use Prisma for schema migrations and type-safe queries.
+3. **Custom Queries:** Leverage Drizzle ORM for optimized, raw SQL where needed.
+
+## Let’s Build Together
+
+PostgreSQL, Prisma, and Drizzle ORM are a powerful trio for modern web applications. Whether you’re building a portfolio project or scaling a startup, these tools can supercharge your backend development.
+
+If you have questions or want to collaborate, feel free to reach out:
+
+- **Website**: [hamzaaslikh.com](https://hamzaaslikh.com)
+- **GitHub**: [github.com/hamzaaslikh](https://github.com/hamzaaslikh)
+- **Twitter**: [@hamzaaslikh](https://twitter.com/hamzaaslikh)
+
+Stay tuned for more posts on backend development best practices. Happy coding! 🎉
+
+---
+
+### SEO Keywords:
+- PostgreSQL with Prisma
+- Drizzle ORM tutorial
+- Prisma and Drizzle comparison
+- Hamza Aslikh blog
+- Database management tools
