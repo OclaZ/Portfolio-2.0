@@ -121,7 +121,7 @@ export const DATA = {
       badges: ["Bootcamp"], 
       location: "Agadir, Morocco",
       title: "AI Developer", 
-      logoUrl: "/Simplon_maghreb.png", // Added placeholder for new logo
+      logoUrl: "/Simplon_Maghreb.png", // Added placeholder for new logo
       start: "September 2025", // [cite: 21]
       end: "Present", // [cite: 21]
       description: `
