@@ -44,30 +44,13 @@ Sans cadre formel, on tombe vite dans le piège de la *Vibe Check* : modifier un
 
 Pour sortir du subjectif, l'industrie s'est alignée sur des **dimensions de qualité** standards :
 
-<div style={{ overflowX: "auto", marginTop: "1rem", marginBottom: "1rem" }}>
-  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-    <thead>
-      <tr style={{ borderBottom: "2px solid #e5e7eb" }}>
-        <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: "700" }}>Dimension</th>
-        <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: "700" }}>Question clé</th>
-      </tr>
-    </thead>
-    <tbody>
-      {[
-        ["Pertinence", "La réponse adresse-t-elle directement la demande ?"],
-        ["Cohérence", "Le texte est-il logique et sans contradictions ?"],
-        ["Précision factuelle", "Les faits énoncés sont-ils vrais ?"],
-        ["Utilité", "La réponse permet-elle à l'utilisateur d'avancer ?"],
-        ["Sécurité", "Le contenu évite-t-il les biais ou les sorties inappropriées ?"],
-      ].map(([dim, question], i) => (
-        <tr key={i} style={{ borderBottom: "1px solid #e5e7eb", backgroundColor: i % 2 === 0 ? "transparent" : "rgba(0,0,0,0.02)" }}>
-          <td style={{ padding: "10px 14px", fontWeight: "600" }}>{dim}</td>
-          <td style={{ padding: "10px 14px" }}>{question}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+| Dimension | Question clé |
+| --- | --- |
+| **Pertinence** | La réponse adresse-t-elle directement la demande ? |
+| **Cohérence** | Le texte est-il logique et sans contradictions ? |
+| **Précision factuelle** | Les faits énoncés sont-ils vrais ? |
+| **Utilité** | La réponse permet-elle à l'utilisateur d'avancer ? |
+| **Sécurité** | Le contenu évite-t-il les biais ou les sorties inappropriées ? |
 
 L'absence d'intégration continue (CI) pour vos prompts transforme chaque mise à jour en pari. Ce sont vos **utilisateurs** qui deviennent vos testeurs de régression — et le prix à payer, c'est votre crédibilité.
 
@@ -163,4 +146,3 @@ Cet article vous a été utile ? Envie d'échanger sur l'ingénierie LLM ou de c
 
 - 🌐 **Website :** [hamzaaslikh.com](https://hamzaaslikh.com)
 - 🐙 **GitHub :** [github.com/hamzaaslikh](https://github.com/hamzaaslikh)
-- 🐦 **Twitter :** [@hamzaaslikh](https://twitter.com/hamzaaslikh)

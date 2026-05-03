@@ -5,6 +5,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import remarkGfm from "remark-gfm"; 
 import { unified } from "unified";
 
 type Metadata = {
@@ -22,6 +23,7 @@ export async function markdownToHTML(markdown: string) {
   const p = await unified()
     .use(remarkParse)
     .use(remarkRehype)
+    .use(remarkGfm)
     .use(rehypePrettyCode, {
       // https://rehype-pretty.pages.dev/#usage
       theme: {
