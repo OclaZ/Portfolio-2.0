@@ -1,0 +1,148 @@
+---
+title: "Pourquoi vos tests unitaires traditionnels ne sauveront pas votre application LLM"
+publishedAt: "2026-05-03"
+summary: "Découvrez pourquoi les tests classiques sont insuffisants pour les applications basées sur des LLM, et comment construire un vrai système d'évaluation (evals) pour passer de la démo au produit fiable."
+---
+
+# Pourquoi vos tests unitaires traditionnels ne sauveront pas votre application LLM 🤖
+
+Bonjour à tous ! Je suis **Hamza Aslikh**, développeur passionné par l'ingénierie des systèmes IA. Dans cet article, je vous partage une réalité que tout développeur LLM finit par affronter : vos réflexes de test habituels ne fonctionnent tout simplement plus — et voici comment y remédier.
+
+Vous venez de déployer une nouvelle fonctionnalité basée sur un LLM. Lors de vos tests manuels, tout semblait parfait. Pourtant, vingt-quatre heures plus tard, un utilisateur publie une capture d'écran montrant le modèle en train d'halluciner de manière spectaculaire. Vous ajustez le prompt, ça refonctionne… mais avez-vous **réellement** corrigé le problème, ou avez-vous simplement eu de la chance ?
+
+## Le choc du non-déterminisme
+
+Dans le logiciel traditionnel, une fonction appelée avec la même entrée produit toujours la même sortie. Avec les LLM, ce déterminisme vole en éclats à cause de deux paramètres fondamentaux :
+
+- **La température :** contrôle le niveau de "créativité" des réponses.
+- **Le Top-p (nucleus sampling) :** pilote la diversité des tokens sélectionnés.
+
+Parce qu'un LLM est fondamentalement **probabiliste**, un test réussi n'est qu'un seul point de données, pas un verdict. Vous n'êtes pas en train de tester une fonction ; vous **échantillonnez une distribution**.
+
+> *"Nos instincts de test traditionnels nous trompent : avec les LLM, on ne teste pas une fonction, on échantillonne une distribution. Un seul échantillon ne dit presque rien sur la fiabilité réelle du système."*
+
+Pour obtenir une vraie rigueur statistique, vous devez exécuter vos évaluations plusieurs fois et mesurer la **moyenne** ainsi que la **variance**. Si votre score de qualité passe de 4.1 à 4.3 sur une seule exécution, c'est probablement du bruit statistique — pas une amélioration réelle.
+
+```python
+import statistics
+
+# Exemple : exécuter la même évaluation N fois
+scores = [run_eval(prompt, test_case) for _ in range(10)]
+
+print(f"Score moyen : {statistics.mean(scores):.2f}")
+print(f"Écart-type  : {statistics.stdev(scores):.2f}")
+```
+
+En phase d'évaluation, la bonne pratique est de **fixer la température à 0** pour verrouiller le déterminisme, tout en sachant que la production restera intrinsèquement plus variable.
+
+## Le danger de la "Vibe Check"
+
+Sans cadre formel, on tombe vite dans le piège de la *Vibe Check* : modifier un prompt et vérifier manuellement si "l'ambiance" de la réponse semble correcte. Cette méthode est incapable de détecter deux problèmes critiques :
+
+- La **Fuzzy Correctness** (la justesse floue) : une réponse peut sonner bien tout en étant factuellement fausse.
+- Les **régressions silencieuses** : corriger un comportement ici pour en casser trois ailleurs.
+
+Pour sortir du subjectif, l'industrie s'est alignée sur des **dimensions de qualité** standards :
+
+| Dimension | Question clé |
+|---|---|
+| **Pertinence** | La réponse adresse-t-elle directement la demande ? |
+| **Cohérence** | Le texte est-il logique et sans contradictions ? |
+| **Précision factuelle** | Les faits énoncés sont-ils vrais ? |
+| **Utilité** | La réponse permet-elle à l'utilisateur d'avancer ? |
+| **Sécurité** | Le contenu évite-t-il les biais ou les sorties inappropriées ? |
+
+L'absence d'intégration continue (CI) pour vos prompts transforme chaque mise à jour en pari. Ce sont vos **utilisateurs** qui deviennent vos testeurs de régression — et le prix à payer, c'est votre crédibilité.
+
+## Le Golden Set : votre infrastructure de vérité
+
+Le *Golden Set* est une collection curatée de cas de tests de haute qualité servant de "vérité terrain". C'est l'artefact le plus critique de votre système d'évaluation. Voici les règles d'or pour le construire :
+
+- **Bannissez l'imagination :** ne rédigez pas vos tests vous-même. Les développeurs anticipent mal la créativité — souvent confuse — des utilisateurs réels.
+- **Sourcez la production :** utilisez des requêtes réelles, anonymisées et nettoyées. C'est le seul moyen d'avoir une couverture représentative.
+- **Méfiez-vous de la contamination :** les benchmarks publics (MMLU, HumanEval) ont souvent été vus par les modèles à l'entraînement. Un score élevé peut refléter une mémorisation, pas une vraie compétence. Votre Golden Set **doit rester privé**.
+- **Fixez un seuil de réussite :** passer d'un score (1 à 5) à une décision binaire (Pass/Fail) est une **décision produit**. Quel niveau d'hallucination votre business peut-il tolérer ?
+
+## La Triade RAG : diagnostiquer une erreur
+
+Pour les systèmes RAG (Retrieval-Augmented Generation), il faut isoler trois piliers pour comprendre précisément où le système flanche :
+
+- **Fidélité (Faithfulness) :** la réponse est-elle bien ancrée dans les documents récupérés ?
+- **Pertinence de la réponse (Answer Relevance) :** répond-on réellement à la question posée ?
+- **Précision du contexte (Context Precision) :** le moteur de recherche a-t-il extrait les bons documents ?
+
+Cette triade permet d'identifier trois patterns d'échec bien distincts :
+
+```
+❌ Le moteur renvoie des segments non pertinents
+   → Problème d'indexation ou d'embeddings.
+
+❌ Le contexte est correct, mais le modèle l'ignore
+   → Votre prompt n'est pas assez directif sur l'utilisation des sources.
+
+❌ La réponse est fidèle mais inutile
+   → Votre base de connaissances est incomplète.
+      Aucune modification de prompt ne sauvera un manque de données.
+```
+
+## L'Eval Stack : une approche en cinq couches
+
+Un système d'évaluation robuste superpose cinq couches complémentaires :
+
+### 1. Heuristiques déterministes
+
+Du code pur et simple — votre première ligne de défense, rapide et gratuite.
+
+```python
+import json
+
+def is_valid_json(response: str) -> bool:
+    try:
+        json.loads(response)
+        return True
+    except json.JSONDecodeError:
+        return False
+
+def contains_banned_words(response: str, banned: list[str]) -> bool:
+    return any(word in response.lower() for word in banned)
+```
+
+### 2. Métriques sémantiques
+
+Utilisation d'**embeddings** — des vecteurs numériques représentant le sens profond du texte — pour comparer si deux phrases disent la même chose sans utiliser les mêmes mots.
+
+### 3. LLM-as-Judge (Offline)
+
+Utilisation de modèles ultra-performants (GPT-4o, Claude Opus) pour scorer vos sorties. Deux approches existent :
+
+- **Pointwise :** le juge attribue une note de 1 à 5. Simple, mais parfois instable.
+- **Pairwise :** le juge compare deux versions (A vs B) et désigne la meilleure. C'est le **Gold Standard** pour valider un nouveau prompt — plus coûteux mais bien plus fiable.
+
+### 4. LLM-as-Judge (Online)
+
+Des modèles légers déployés en production pour surveiller la qualité en continu, en temps réel.
+
+### 5. Contrôles humains
+
+Indispensable pour la calibration. Si votre juge LLM donne systématiquement 5/5 là où un humain met 2/5, votre système d'évaluation est **biaisé** et doit être recalibré.
+
+## Vers une ingénierie de la confiance
+
+L'évaluation n'est pas la dernière étape d'un projet IA : c'est le **moteur de son itération**. Sans mesure, vous ne faites pas de l'ingénierie — vous faites de la divination.
+
+Pour passer des *vibes* à une production sérieuse, commencez par un **MVP d'évaluation** minimal mais solide :
+
+1. **50 exemples réels** — votre point de départ pour un Golden Set.
+2. **Une heuristique simple** — validation JSON, détection de phrases interdites.
+3. **Un juge LLM avec un rubric clair** — par exemple, scorer la Fidélité sur une dimension à la fois.
+
+C'est seulement ainsi que vous transformerez un prototype fragile en un système sur lequel votre entreprise peut réellement compter.
+
+---
+
+## Construisons ensemble
+
+Cet article vous a été utile ? Envie d'échanger sur l'ingénierie LLM ou de collaborer sur un projet open-source ? Connectons-nous !
+
+- 🌐 **Website :** [hamzaaslikh.com](https://hamzaaslikh.com)
+- 🐙 **GitHub :** [github.com/hamzaaslikh](https://github.com/hamzaaslikh)
